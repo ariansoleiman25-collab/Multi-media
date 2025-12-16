@@ -1,332 +1,295 @@
 const questions = [
     {
         n: 1,
-        q: "Which file format is commonly used for storing audio in multimedia applications?",
-        a: ["JPEG", "MP3", "GIF", "PNG"],
+        q: "What is a network?",
+        a: ["A single computer with internet access", "Two or more connected computers that can share resources", "A collection of software programs", "A type of operating system"],
         correct: 1
     },
     {
         n: 2,
-        q: "Main components of multimedia are ………",
-        a: ["sound", "text", "animation", "All of them"],
-        correct: 3
+        q: "Which device connects all segments of a network together in a star topology?",
+        a: ["Router", "Switch", "Hub", "Bridge"],
+        correct: 2
     },
     {
         n: 3,
-        q: "What does the term 'multimedia' refer to?",
-        a: ["Text-based content", "Content that combines multiple forms of media", "Audio-only content", "Printed materials"],
+        q: "What type of server handles email functions?",
+        a: ["File server", "Mail server", "Print server", "Web server"],
         correct: 1
     },
     {
         n: 4,
-        q: "Which of is a system by which the motion of various living things are captured and integrated into the computer?",
-        a: ["3d rapid digitizer", "motion tracking cameras", "Motion capturing system", "All of above"],
+        q: "Which server type manages web-based activities by running HTTP?",
+        a: ["Fax server", "Application server", "Web server", "Telephony server"],
         correct: 2
     },
     {
         n: 5,
-        q: "Which field of Multimedia are developed day by day?",
-        a: ["latest technology", "cameras", "only content", "Printer"],
+        q: "What does VLAN stand for?",
+        a: ["Virtual Local Area Network", "Very Large Area Network", "Variable Length Area Network", "Virtual Linear Access Network"],
         correct: 0
     },
     {
         n: 6,
-        q: "Which multimedia networking application is designed for real-time video conferencing and online meetings?",
-        a: ["video streaming", "Online game", "VOIP", "share"],
-        correct: 2
+        q: "What is the main advantage of VLANs?",
+        a: ["They require more cables", "They allow you to be anywhere on the physical network and still be local to specific network resources", "They are slower than regular LANs", "They only work with wireless connections"],
+        correct: 1
     },
     {
         n: 7,
-        q: "Which of the following client playing out early of video while server will sending later parts?",
-        a: ["Conversial", "streaming", "striming live", "storing"],
+        q: "Which type of network spans larger geographic areas?",
+        a: ["LAN", "WAN", "VLAN", "PAN"],
         correct: 1
     },
     {
         n: 8,
-        q: "Which of the following of the video encoding rate fixed?",
-        a: ["video", "CBR", "VBR", "pixel"],
-        correct: 1
-    },
-    {
-        n: 9,
-        q: "Audio signal is ……… signal",
-        a: ["analog siganl", "radio signal", "system signal", "voice recognition"],
+        q: "What does WAN stand for?",
+        a: ["Wide Area Network", "Wireless Access Network", "World Area Network", "Web Access Network"],
         correct: 0
     },
     {
+        n: 9,
+        q: "What is a key characteristic of WANs compared to LANs?",
+        a: ["They are usually faster", "They span larger geographic areas", "They are always wireless", "They don't need routers"],
+        correct: 1
+    },
+    {
         n: 10,
-        q: "UDP stands for …………",
-        a: ["user datagram protocol", "user data", "user protocol", "using data protocol"],
+        q: "What does VPN stand for?",
+        a: ["Virtual Private Network", "Very Private Network", "Variable Protocol Network", "Virtual Public Network"],
         correct: 0
     },
     {
         n: 11,
-        q: "Main components of multimedia are ………",
-        a: ["video", "text", "camera", "Video & Text (A+B)"],
-        correct: 3
+        q: "What is the main benefit of using a VPN?",
+        a: ["Faster internet speed", "Security for remote connections", "Cheaper internet access", "More storage space"],
+        correct: 1
     },
     {
         n: 12,
-        q: "Which of the following are the laser controlled scanners?",
-        a: ["3d rapid digitizer", "motion tracking cameras", "virtual reality", "voice recognition system"],
-        correct: 0
+        q: "In peer-to-peer networks, what role do computers play?",
+        a: ["Only client machines", "Only server machines", "Both client and server machines", "Neither client nor server"],
+        correct: 2
     },
     {
         n: 13,
-        q: "Which file format is commonly used for storing video in multimedia applications?",
-        a: ["MP4", "MP3", "GIF", "PNG"],
-        correct: 0
+        q: "What is a major disadvantage of peer-to-peer networks?",
+        a: ["They are too expensive", "Security is not centrally governed", "They are too fast", "They require too many cables"],
+        correct: 1
     },
     {
         n: 14,
-        q: "Which of the following based authoring systems allow documents to be built by defining and manipulating objects on the screen?",
-        a: ["Hypertext", "Hypermedia", "authoring", "editing"],
+        q: "In client/server networks, where are usernames and passwords stored?",
+        a: ["On each individual computer", "On the main server", "In the cloud only", "On external drives"],
         correct: 1
     },
     {
         n: 15,
-        q: "There are many hardware and software accessories to create graphics",
-        a: ["Drawing software", "scanning", "Non-liner editing", "3D"],
-        correct: 0
+        q: "What is the main advantage of client/server networks over peer-to-peer?",
+        a: ["They are cheaper to implement", "They provide better organization and security", "They require no maintenance", "They work without electricity"],
+        correct: 1
     },
     {
         n: 16,
-        q: "Which of the following is used in video in multimedia?",
-        a: ["MPEG1", "MPEG2", "data", "MPEG1 & MPEG2 (A+B)"],
-        correct: 3
+        q: "In a star topology, where do all devices connect?",
+        a: ["To each other directly", "To a central point", "In a line", "In a circle"],
+        correct: 1
     },
     {
         n: 17,
-        q: "Which network quality factor can affect the clarity of VoIP calls?",
-        a: ["internet speed", "printer setting", "protocols", "weather"],
-        correct: 0
+        q: "What happens if the central device fails in a star topology?",
+        a: ["Only one computer stops working", "The whole network goes down", "Nothing happens", "The network becomes faster"],
+        correct: 1
     },
     {
         n: 18,
-        q: "HTTP stands for …………..",
-        a: ["hypertext transfer protocol", "text protocol", "website text protocol", "transfer protocol"],
-        correct: 0
+        q: "What is an advantage of star topology over bus topology?",
+        a: ["Uses less cable", "Easier to troubleshoot", "Faster data transmission", "No central point of failure"],
+        correct: 1
     },
     {
         n: 19,
-        q: "............ is a sequence of images displayed at constant rate",
-        a: ["video", "tracking cameras", "image", "CD"],
-        correct: 0
+        q: "In mesh topology, how are devices connected?",
+        a: ["All devices connect to a central hub", "Devices connect in a line", "There's a path from every device to every other device", "Devices connect in pairs only"],
+        correct: 2
     },
     {
         n: 20,
-        q: "Can being playout before downloading entire file",
-        a: ["streaming", "store", "streaming live", "internet"],
-        correct: 0
+        q: "What is the formula for calculating connections in a full mesh network?",
+        a: ["n×2", "n(n-1)/2", "n²", "n+1"],
+        correct: 1
     },
     {
         n: 21,
-        q: "Which of the following can transmit faster than audio/video will be rendered?",
-        a: ["streaming", "store", "streaming live", "internet"],
+        q: "How many connections would a full mesh network with 6 devices have?",
+        a: ["12", "15", "18", "21"],
         correct: 1
     },
     {
         n: 22,
-        q: "Interactive nature of human-to-human conversation limits delay tolerance are called ………….",
-        a: ["streaming", "store", "loss tolerance", "conversational"],
-        correct: 3
+        q: "What is the main advantage of mesh topology?",
+        a: ["Lowest cost", "Easiest to install", "High fault tolerance", "Fastest speed"],
+        correct: 2
     },
     {
         n: 23,
-        q: "Example of streaming live like …………",
-        a: ["video", "audio", "streaming live", "data"],
-        correct: 2
+        q: "In point-to-point topology, how many devices are directly connected?",
+        a: ["One", "Two", "Three", "Many"],
+        correct: 1
     },
     {
         n: 24,
-        q: "Which of the following may not go through firewalls?",
-        a: ["RTP", "UDP", "HTTP", "A & B"],
-        correct: 3
+        q: "What type of cable has four twisted wire pairs?",
+        a: ["Category 3", "Category 5e", "Coaxial", "All of the above"],
+        correct: 1
     },
     {
         n: 25,
-        q: "Which of the following may easily go through firewalls?",
-        a: ["TCP", "HTTP", "UDP", "A & B"],
-        correct: 3
+        q: "What is the maximum frequency rating for Cat 5e cable?",
+        a: ["50MHz", "100MHz", "250MHz", "350MHz"],
+        correct: 1
     },
     {
         n: 26,
-        q: "What is different between CBR and VBR?",
-        a: ["CBR is Constant Bit Rate, VBR is Variable", "CBR is colorful, VBR is visual", "No difference", "VBR is faster"],
-        correct: 0
-    },
-    {
-        n: 27,
-        q: "Multimedia requires what in PCs?",
-        a: ["Fast CPU & Graphics Card", "Only a mouse", "Just a monitor", "Printer"],
-        correct: 0
-    },
-    {
-        n: 28,
-        q: "What is continuous playout constraint?",
-        a: ["Data must arrive before its deadline to play smooth", "Playing continuously without stop", "Constraint on volume", "None of the above"],
-        correct: 0
-    },
-    {
-        n: 29,
-        q: "What is motion tracking cameras?",
-        a: ["Cameras that capture movement for 3D", "Cameras that take photos", "Security cameras", "Webcams"],
-        correct: 0
-    },
-    {
-        n: 30,
-        q: "Which one determine how does call advertise IP address, port number, encoding algorithms?",
-        a: ["VOIP", "session initialization", "loss tolerance", "conversational"],
-        correct: 1
-    },
-    {
-        n: 31,
-        q: "Call forwarding, screening, recording is example of …………..",
-        a: ["VOIP", "session", "value added services", "jetter"],
+        q: "Which category of UTP cable is rated for 250MHz?",
+        a: ["Cat 5", "Cat 5e", "Cat 6", "Cat 3"],
         correct: 2
     },
     {
-        n: 32,
-        q: "IP datagram arrives too late for playout at receiver",
-        a: ["network loss", "delay loss", "loss tolerance", "jetter"],
+        n: 27,
+        q: "What does the 'T' in 100Base-T stand for?",
+        a: ["Telephone", "Twisted-pair", "Terminal", "Transmission"],
         correct: 1
     },
     {
+        n: 28,
+        q: "Why are wires twisted in twisted-pair cables?",
+        a: ["To make them stronger", "To minimize interference and crosstalk", "To make them cheaper", "To increase speed"],
+        correct: 1
+    },
+    {
+        n: 29,
+        q: "What is the maximum segment length for twisted-pair cable?",
+        a: ["100 meters", "200 meters", "328 feet", "Both a and c"],
+        correct: 3
+    },
+    {
+        n: 30,
+        q: "What type of light source is used with single-mode fiber?",
+        a: ["LEDs only", "Lasers only", "Both LEDs and lasers", "Neither LEDs nor lasers"],
+        correct: 2
+    },
+    {
+        n: 31,
+        q: "Which fiber type can transmit data further distances?",
+        a: ["Single-mode fiber", "Multimode fiber", "Both are equal", "Neither can transmit far"],
+        correct: 0
+    },
+    {
+        n: 32,
+        q: "What is the core material in fiber-optic cables?",
+        a: ["Copper", "Aluminum", "Glass or plastic", "Steel"],
+        correct: 2
+    },
+    {
         n: 33,
-        q: "RTP stands for what?",
-        a: ["Relative translation protocol", "Real time protocol", "Right time protocol", "Remove time protocol"],
+        q: "What is a major advantage of fiber-optic cables?",
+        a: ["They are cheaper than copper", "They are immune to EMI and RFI", "They are easier to install", "They require no special equipment"],
         correct: 1
     },
     {
         n: 34,
-        q: "911 is an example of ………. In VOIP",
-        a: ["End-end delay", "session", "value added", "Emergency"],
-        correct: 3
+        q: "What does SMF stand for in fiber optics?",
+        a: ["Small Mode Fiber", "Single-Mode Fiber", "Special Multi Fiber", "Standard Mode Fiber"],
+        correct: 1
     },
     {
         n: 35,
-        q: "Interactive nature human to human is ………….",
-        a: ["switching", "store", "Conversational", "streaming"],
-        correct: 2
+        q: "What does MMF stand for in fiber optics?",
+        a: ["Multiple Mode Fiber", "Multimode Fiber", "Many Mode Fiber", "Mixed Mode Fiber"],
+        correct: 1
     },
     {
         n: 36,
-        q: "Example of client interactivity like……..",
-        a: ["pause", "fast forward", "rewind", "all of them"],
-        correct: 3
+        q: "Which fiber connector uses a BNC-like attachment mechanism?",
+        a: ["SC connector", "LC connector", "ST connector", "MT-RJ connector"],
+        correct: 2
     },
     {
         n: 37,
-        q: "Which of the following of the video encoding rate changed?",
-        a: ["video", "CBR", "VBR", "pixel"],
-        correct: 2
+        q: "What does SFF stand for in fiber connectors?",
+        a: ["Single Fiber Format", "Small Form Factor", "Special Fiber Function", "Standard Form Factor"],
+        correct: 1
     },
     {
         n: 38,
-        q: "What is loss tolerance?",
-        a: ["Ability to handle some packet loss without failure", "Losing data totally", "Zero tolerance for errors", "None of these"],
-        correct: 0
+        q: "Which is a small form factor fiber connector?",
+        a: ["ST", "SC", "LC", "BNC"],
+        correct: 2
     },
     {
         n: 39,
-        q: "Write multimedia application areas?",
-        a: ["Education, Entertainment, Business", "Only gaming", "Only text editors", "None"],
-        correct: 0
+        q: "What advantage do SFF connectors offer?",
+        a: ["Lower cost", "Higher speed", "More terminations in the same space", "Easier installation"],
+        correct: 2
     },
     {
         n: 40,
-        q: "Explain voice recognition system?",
-        a: ["System converting speech to text/commands", "Playing music", "Recording video", "None"],
-        correct: 0
-    },
-    {
-        n: 41,
-        q: "Which of the following use redundancy within and between images?",
-        a: ["coding", "packet", "time", "control"],
-        correct: 0
-    },
-    {
-        n: 42,
-        q: "……… means from one image to next",
-        a: ["spatial", "temporal", "bit", "protocol"],
-        correct: 1
-    },
-    {
-        n: 43,
-        q: "Which of the following is an array of pixels?",
-        a: ["video", "image", "digital image", "coding"],
+        q: "Which fiber connector is becoming more popular for Gigabit Ethernet?",
+        a: ["ST", "SC", "LC", "MT-RJ"],
         correct: 2
+    }
+];
+
+const shortQuestions = [
+    {
+        n: 1,
+        q: "Explain the difference between a hub and a switch in terms of how they handle data transmission.",
+        a: "• Hub: Broadcasts data to ALL ports (Single Collision Domain).\n• Switch: Sends data ONLY to destination port (Separate Collision Domains)."
     },
     {
-        n: 44,
-        q: "Which of the following is an example of multimedia content?",
-        a: ["A plain text document", "A black-and-white photograph", "A video with sound", "A spreadsheet"],
-        correct: 2
+        n: 2,
+        q: "Describe three advantages and three disadvantages of star topology.",
+        a: "Advantages:\n1. Easy to add/remove devices.\n2. One cable failure doesn't kill network.\n3. Easy to troubleshoot.\n\nDisadvantages:\n1. Higher cable cost.\n2. Single point of failure (Hub/Switch).\n3. More expensive hardware."
     },
     {
-        n: 45,
-        q: "Which component of multimedia deals with visual elements such as images, videos, and animations?",
-        a: ["Audio", "Text", "Graphics", "Interactivity"],
-        correct: 2
+        n: 3,
+        q: "What is the difference between single-mode and multimode fiber optic cables?",
+        a: "• Single-Mode (SMF): Laser light, 1 path, Long distance (40km+), Higher bandwidth.\n• Multi-Mode (MMF): LED light, Multiple paths, Short distance (3000ft), Cheaper."
     },
     {
-        n: 46,
-        q: "What is the purpose of hypertext in multimedia?",
-        a: ["To provide visual effects", "To link different multimedia elements together", "To add background music", "To enhance video quality"],
-        correct: 1
+        n: 4,
+        q: "Explain what VLANs are and why they are useful in modern networks.",
+        a: "• Definition: Logical grouping of devices regardless of physical location.\n• Benefits: Better security, reduced broadcast traffic, flexible administration."
     },
     {
-        n: 47,
-        q: "Which multimedia format is known for its ability to support transparent backgrounds in images?",
-        a: ["JPEG", "TIFF", "GIF", "BMP"],
-        correct: 2
+        n: 5,
+        q: "Compare and contrast peer-to-peer and client/server network architectures.",
+        a: "• Peer-to-Peer: Decentralized, no dedicated server, cheap, hard to backup/secure.\n• Client/Server: Centralized control, dedicated server, scalable, secure, expensive."
     },
     {
-        n: 48,
-        q: "Which multimedia element provides the capability for user interaction?",
-        a: ["Audio", "Video", "Animation", "Interactivity"],
-        correct: 3
+        n: 6,
+        q: "What are the main differences between LANs and WANs?",
+        a: "• LAN: Small area (building), Private ownership, High speed, Low cost.\n• WAN: Large area (connects cities/countries), Leased/Public lines, Slower, High cost."
     },
     {
-        n: 49,
-        q: "Which technology is commonly used for streaming multimedia content over the internet?",
-        a: ["HTML", "FTP", "HTTP", "SMTP"],
-        correct: 2
+        n: 7,
+        q: "Describe the purpose and benefits of using VPNs.",
+        a: "• Purpose: Secure, encrypted tunnel over a public network (Internet).\n• Benefits: Remote access security, cost savings vs leased lines, privacy."
     },
     {
-        n: 50,
-        q: "Which protocol is commonly used for streaming multimedia content over the internet?",
-        a: ["HTTP", "SMTP", "FTP", "DNS"],
-        correct: 0
+        n: 8,
+        q: "Explain why twisted-pair cables have their wires twisted and what problems this solves.",
+        a: "• Problem: Electromagnetic Interference (EMI) and Crosstalk.\n• Solution: Twisting cancels out magnetic fields, preserving signal integrity."
     },
     {
-        n: 51,
-        q: "In RTCP what CP refers to?",
-        a: ["canal protocol", "packet protocol", "time protocol", "control protocol"],
-        correct: 3
+        n: 9,
+        q: "What factors should be considered when choosing between copper and fiber optic cables?",
+        a: "• Distance: Fiber > 100m.\n• Interference: Fiber is immune to EMI.\n• Budget: Copper is cheaper.\n• Bandwidth: Fiber is much higher."
     },
     {
-        n: 52,
-        q: "Determine number of packets send in …………",
-        a: ["receiver", "source", "sender", "none of them"],
-        correct: 2
-    },
-    {
-        n: 53,
-        q: "Function of SIP server is …………",
-        a: ["Client", "time management", "registrar", "none of them"],
-        correct: 2
-    },
-    {
-        n: 54,
-        q: "SSRC filed is ………….. bits",
-        a: ["32", "15", "16", "7"],
-        correct: 0
-    },
-    {
-        n: 55,
-        q: "In RTP sequence number is ……… bits",
-        a: ["15", "16", "16", "32"],
-        correct: 1
+        n: 10,
+        q: "Describe the key characteristics that differentiate Category 5e, Category 6, and fiber optic cables.",
+        a: "• Cat 5e: 100MHz, 1Gbps, shorter runs.\n• Cat 6: 250MHz, 10Gbps (short), thicker/stiffer.\n• Fiber: Light signals, immune to interference, km distances, highest speed."
     }
 ];

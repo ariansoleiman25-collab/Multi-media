@@ -20,6 +20,13 @@
     <div class="cursor"></div>
     <div class="cursor-follower"></div>
 
+    <!-- Sound Toggle -->
+    <button id="sound-toggle" class="sound-toggle" aria-label="Toggle Sound">
+        <svg viewBox="0 0 24 24">
+            <path d="M14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77zm-4 0c-4.01.91-7 4.49-7 8.77s2.99 7.86 7 8.77v-2.06c-2.89-.86-5-3.54-5-6.71s2.11-5.85 5-6.71V3.23zM16.5 12c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM8 9H5v6h3l5 5V4L8 9z"/>
+        </svg>
+    </button>
+
     <!-- Fluid Background -->
     <div class="fluid-bg">
         <div class="blob blob-1"></div>
@@ -35,14 +42,18 @@
             <div class="hero-content">
                 <span class="pill-badge"> Arian </span>
                 <h1 class="hero-title">
-                    <span class="line-1">لێهاتوویی</span>
-                    <span class="line-2">لە مالتیمیدیا</span>
+                    <span class="line-1">ڕەقەکاڵای</span>
+                    <span class="line-2">تۆڕ</span>
                 </h1>
                 <p class="hero-subtitle">٥٥ پرسیاری هەڵبژێردراو بۆ تاقیکردنەوەی زانیارییەکانت.</p>
                 
-                <div class="btn-group">
-                    <button id="start-btn" class="magnetic-btn">
-                        <span class="btn-text">دەستپێکردن</span>
+                <div class="btn-group mode-select">
+                    <button id="start-btn-mcq" class="magnetic-btn" onclick="startQuiz('mcq')">
+                        <span class="btn-text">هەڵبژاردن</span>
+                        <div class="btn-fill"></div>
+                    </button>
+                    <button id="start-btn-sa" class="magnetic-btn secondary" onclick="startQuiz('sa')">
+                        <span class="btn-text">وەڵامی کورت</span>
                         <div class="btn-fill"></div>
                     </button>
                 </div>
@@ -58,6 +69,10 @@
                 <div class="quiz-meta">
                     <span id="question-count">٠١ / ٥٥</span>
                     <span id="score-display">نمرە: ٠</span>
+                    <div id="streak-counter" class="streak-counter hidden">
+                        <span class="streak-icon">🔥</span>
+                        <span id="streak-value">0</span>
+                    </div>
                 </div>
             </div>
 
@@ -68,6 +83,34 @@
                 
                 <div class="options-grid" id="options-container" dir="ltr"> <!-- Keep options LTR for English -->
                     <!-- Options injected via JS -->
+                </div>
+
+                <!-- Short Answer Area -->
+                <div id="sa-container" class="sa-container hidden" dir="rtl">
+                    <div class="sa-input-group">
+                        <textarea id="sa-input" placeholder="وەڵامەکەت لێرە بنووسە (بەدڵخواز)..."></textarea>
+                        <button id="sa-reveal-btn" class="magnetic-btn small">
+                            <span class="btn-text">وەڵام نیشان بدە</span>
+                            <div class="btn-fill"></div>
+                        </button>
+                    </div>
+                    
+                    <div id="sa-model-answer" class="sa-model-answer hidden">
+                        <h3>وەڵامی نموونەیی:</h3>
+                        <p id="sa-answer-text" dir="ltr"></p> <!-- English Answer Text -->
+                        
+                        <div class="sa-grading">
+                            <p>ئاستت چۆن بوو؟</p>
+                            <div class="grade-btns">
+                                <button class="grade-btn correct" id="grade-correct">
+                                    <span>دەمزانى</span>
+                                </button>
+                                <button class="grade-btn wrong" id="grade-wrong">
+                                    <span>نەمدەزانى</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             
