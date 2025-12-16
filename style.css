@@ -27,6 +27,8 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+    transform: translateZ(0); /* Trigger GPU Acceleration */
+    perspective: 1000px; /* Base perspective for best 3D performance */
 }
 
 /* Custom Cursor - Only on Desktop */

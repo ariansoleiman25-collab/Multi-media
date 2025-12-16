@@ -115,50 +115,69 @@ function initRainEffect() {
     }
 
     let animationId;
-    function anim() {
-        if (document.hidden) {
-             // Stop loop if tab hidden
-             return;
-        }
+    let lastTime = 0;
+    const fps = 30; // Throttle to 30fps for performance
+    const interval = 1000 / fps;
 
-        ctx.clearRect(0, 0, width, height);
-        
-        // Draw Gradient Background manually if needed, or let CSS handle it.
-        // CSS handles bg color, we just draw rain.
-        
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.1)'; // Light rain color
-        ctx.strokeStyle = 'rgba(174, 194, 224, 0.5)'; // Blue-ish tint
-        ctx.lineWidth = 1;
+    function anim(currentTime) {
+        if (document.hidden) return; // Stop if hidden
 
-        drops.forEach(d => {
-            ctx.beginPath();
-            ctx.moveTo(d.x, d.y);
-            ctx.lineTo(d.x, d.y + d.l);
-            ctx.strokeStyle = `rgba(255, 255, 255, ${d.o})`;
-            ctx.stroke();
-
-            d.y += d.vy;
-            if (d.y > height) {
-                d.y = -d.l;
-                d.x = Math.random() * width;
-            }
-        });
-        
         animationId = requestAnimationFrame(anim);
+        
+        const delta = currentTime - lastTime;
+        if (delta > interval) {
+            lastTime = currentTime - (delta % interval);
+            
+            ctx.clearRect(0, 0, width, height);
+            
+            // Batch drawing
+            ctx.beginPath();
+            ctx.strokeStyle = 'rgba(174, 194, 224, 0.5)';
+            ctx.lineWidth = 1;
+
+            for (let i = 0; i < maxDrops; i++) {
+                const d = drops[i];
+                ctx.moveTo(d.x, d.y);
+                ctx.lineTo(d.x, d.y + d.l);
+
+                d.y += d.vy;
+                if (d.y > height) {
+                    d.y = -d.l;
+                    d.x = Math.random() * width;
+                }
+            }
+            ctx.stroke(); // Single draw call
+        }
     }
     
     // Restart on visibility change
     document.addEventListener('visibilitychange', () => {
         if (!document.hidden) {
             cancelAnimationFrame(animationId);
-            anim();
+            anim(performance.now());
         }
     });
 
-    anim();
-    
-    console.log("Custom Rain Engine Started");
+    anim(performance.now());
+    console.log("Custom Rain Engine (Optimized 30fps) Started");
 }
+
+// --- Global Auto-Play Logic ---
+const attemptAutoPlay = () => {
+    if (sfx.ctx.state === 'suspended') sfx.ctx.resume();
+    // Try to play rain if not already playing
+    if (sfx.enabled && sfx.rainAudio.paused) {
+        sfx.toggleRain(true);
+        console.log("Auto-Play triggered by interaction");
+    }
+    // Remove listeners once successful
+    ['click', 'keydown', 'touchstart', 'scroll'].forEach(evt => 
+        document.removeEventListener(evt, attemptAutoPlay)
+    );
+};
+['click', 'keydown', 'touchstart', 'scroll'].forEach(evt => 
+    document.addEventListener(evt, attemptAutoPlay, { once: true, passive: true })
+);
 
 function initCursor() {
     let mouseX = 0;
@@ -559,6 +578,8 @@ function triggerConfetti() {
     
     // Use DOM elements for confetti to avoid Canvas conflicts with Rain
     const container = document.body;
+    const fragment = document.createDocumentFragment(); // Batch updates
+    
     for (let i = 0; i < 100; i++) {
         const conf = document.createElement('div');
         conf.style.position = 'fixed';
@@ -569,7 +590,8 @@ function triggerConfetti() {
         conf.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
         conf.style.pointerEvents = 'none';
         conf.style.zIndex = '9999';
-        container.appendChild(conf);
+        conf.style.willChange = 'transform, opacity'; // Hardware Accel hint
+        fragment.appendChild(conf);
         
         const destX = (Math.random() - 0.5) * window.innerWidth;
         const destY = (Math.random() - 0.5) * window.innerHeight;
@@ -584,6 +606,7 @@ function triggerConfetti() {
             onComplete: () => conf.remove()
         });
     }
+    container.appendChild(fragment); // Single reflow
 }
 
 function renderReview() {
