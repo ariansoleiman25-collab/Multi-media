@@ -724,27 +724,29 @@ class SoundManager {
     }
 
     playWrong() {
-        // Low discord
+        // Soft low thud (Sine wave slide down)
         const now = this.ctx.currentTime;
-        [150, 140].forEach((freq) => {
-            const osc = this.ctx.createOscillator();
-            const gain = this.ctx.createGain();
-            osc.frequency.value = freq;
-            osc.type = 'sawtooth';
-            gain.gain.setValueAtTime(0.2 * this.masterVolume, now);
-            gain.gain.exponentialRampToValueAtTime(0.001, now + 0.4);
-            osc.connect(gain);
-            gain.connect(this.ctx.destination);
-            osc.start(now);
-            osc.stop(now + 0.5);
-        });
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        
+        osc.frequency.setValueAtTime(150, now);
+        osc.frequency.exponentialRampToValueAtTime(50, now + 0.3); // Pitch drop
+        osc.type = 'sine'; // Soft wave
+        
+        gain.gain.setValueAtTime(0.3 * this.masterVolume, now);
+        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
+        
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.start(now);
+        osc.stop(now + 0.3);
     }
 
     toggleRain(enable) {
         if (enable && this.enabled) {
             if (this.rainOsc) return; // Already playing
             
-            // Pink Noise Buffer
+            // Pink Noise Buffer (Standard method)
             const bufferSize = 4096;
             const pinkNoise = (function() {
                 let b0, b1, b2, b3, b4, b5, b6;
@@ -761,7 +763,7 @@ class SoundManager {
                         b4 = 0.55000 * b4 + white * 0.5329522;
                         b5 = -0.7616 * b5 - white * 0.0168980;
                         output[i] = b0 + b1 + b2 + b3 + b4 + b5 + b6 + white * 0.5362;
-                        output[i] *= 0.11; // (roughly) compensate for gain
+                        output[i] *= 0.11; 
                         b6 = white * 0.115926;
                     }
                 };
@@ -769,12 +771,12 @@ class SoundManager {
             }).call(this);
 
             this.rainGain = this.ctx.createGain();
-            this.rainGain.gain.value = 0.08 * this.masterVolume;
+            this.rainGain.gain.value = 0.6 * this.masterVolume; // Boosted to 0.6 as requested
             
-            // Low Pass Filter for "Calm" effect
+            // Low Pass Filter
             const filter = this.ctx.createBiquadFilter();
             filter.type = 'lowpass';
-            filter.frequency.value = 600; // Muffled, distant rain sound
+            filter.frequency.value = 1000; // Increased Cutoff (was 600) for clarity
             filter.Q.value = 1;
 
             pinkNoise.connect(filter);
