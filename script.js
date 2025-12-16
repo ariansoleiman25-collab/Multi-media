@@ -235,6 +235,11 @@ function animateIntro() {
 }
 
 function startQuiz(mode = 'mcq') {
+    // Start Audio Context & Rain
+    if (sfx.ctx.state === 'suspended') sfx.ctx.resume();
+    sfx.playClick(); 
+    sfx.toggleRain(true); // Ensure rain starts on first interaction
+    
     currentMode = mode;
     activeQuestions = (mode === 'mcq') ? questions : shortQuestions;
     
@@ -678,8 +683,11 @@ class SoundManager {
         this.ctx = new (window.AudioContext || window.webkitAudioContext)();
         this.masterVolume = 0.5;
         this.enabled = true;
-        this.rainOsc = null;
-        this.rainGain = null;
+        
+        // MP3 Rain Audio (User Requested)
+        this.rainAudio = new Audio('rain.mp3');
+        this.rainAudio.loop = true;
+        this.rainAudio.volume = 0.5; 
     }
 
     playTone(freq, type, duration, vol = 1) {
@@ -744,60 +752,12 @@ class SoundManager {
 
     toggleRain(enable) {
         if (enable && this.enabled) {
-            if (this.rainOsc) return; // Already playing
-            if (this.ctx.state === 'suspended') this.ctx.resume(); // Ensure context is running
-            
-            // Create a 5-second buffer of pink noise (More robust than ScriptProcessor)
-            const bufferSize = this.ctx.sampleRate * 5;
-            const buffer = this.ctx.createBuffer(1, bufferSize, this.ctx.sampleRate);
-            const data = buffer.getChannelData(0);
-
-            // Pink Noise Generation Algorithm
-            let b0=0, b1=0, b2=0, b3=0, b4=0, b5=0, b6=0;
-            for (let i = 0; i < bufferSize; i++) {
-                const white = Math.random() * 2 - 1;
-                b0 = 0.99886 * b0 + white * 0.0555179;
-                b1 = 0.99332 * b1 + white * 0.0750759;
-                b2 = 0.96900 * b2 + white * 0.1538520;
-                b3 = 0.86650 * b3 + white * 0.3104856;
-                b4 = 0.55000 * b4 + white * 0.5329522;
-                b5 = -0.7616 * b5 - white * 0.0168980;
-                data[i] = (b0 + b1 + b2 + b3 + b4 + b5 + b6 + white * 0.5362) * 0.11;
-                b6 = white * 0.115926;
-            }
-
-            const noise = this.ctx.createBufferSource();
-            noise.buffer = buffer;
-            noise.loop = true;
-
-            this.rainGain = this.ctx.createGain();
-            this.rainGain.gain.value = 0.8 * this.masterVolume; // High volume
-            
-            // Low Pass Filter
-            const filter = this.ctx.createBiquadFilter();
-            filter.type = 'lowpass';
-            filter.frequency.value = 800; // Optimal for rain
-            filter.Q.value = 1;
-
-            noise.connect(filter);
-            filter.connect(this.rainGain);
-            this.rainGain.connect(this.ctx.destination);
-            
-            noise.start(0);
-            this.rainOsc = noise; // Store node reference
+            // Play MP3
+            this.rainAudio.play().catch(e => console.log("Audio play failed (interaction needed):", e));
         } else {
-            if (this.rainOsc) {
-                try {
-                    this.rainOsc.stop();
-                } catch(e) { /* might already be stopped */ }
-                this.rainOsc.disconnect();
-                this.rainOsc = null;
-                
-                if (this.rainGain) {
-                    this.rainGain.disconnect();
-                    this.rainGain = null;
-                }
-            }
+            // Stop MP3
+            this.rainAudio.pause();
+            this.rainAudio.currentTime = 0; // Reset to start (optional)
         }
     }
 }
