@@ -3,56 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Arian | پریمیۆم</title>
+    <meta name="description" content="تاقیکردنەوەی گرامەری ئینگلیزی - ئاریان">
+    <title>تاقیکردنەوە | ئاریان</title>
+    
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
     <link rel="stylesheet" href="style.css">
-    <!-- GSAP for High-End Animations -->
+    
+    <!-- GSAP Animation Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <!-- Custom Canvas Rain (No external lib) -->
 </head>
 <body>
     <!-- Canvas for Rain Effect -->
     <canvas id="rain-canvas"></canvas>
+    
+    <!-- Ambient Background -->
+    <div class="fluid-bg"></div>
 
     <!-- Custom Cursor -->
     <div class="cursor"></div>
     <div class="cursor-follower"></div>
 
     <!-- Sound Toggle -->
-    <button id="sound-toggle" class="sound-toggle" aria-label="Toggle Sound">
+    <button id="sound-toggle" class="sound-toggle" aria-label="دەنگ">
         <svg viewBox="0 0 24 24">
-            <path d="M14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77zm-4 0c-4.01.91-7 4.49-7 8.77s2.99 7.86 7 8.77v-2.06c-2.89-.86-5-3.54-5-6.71s2.11-5.85 5-6.71V3.23zM16.5 12c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM8 9H5v6h3l5 5V4L8 9z"/>
+            <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
         </svg>
     </button>
 
-    <!-- Fluid Background -->
-    <div class="fluid-bg">
-        <div class="blob blob-1"></div>
-        <div class="blob blob-2"></div>
-        <div class="blob blob-3"></div>
-        <div class="blob blob-4"></div>
-        <div class="noise-overlay"></div>
-    </div>
-    
     <main class="app-container">
         <!-- Start Screen -->
         <section id="start-screen" class="screen full-height-center">
             <div class="hero-content">
-                <span class="pill-badge"> Arian </span>
+                <span class="pill-badge">Arian</span>
                 <h1 class="hero-title">
-                    <span class="line-1">ڕەقەکاڵای</span>
-                    <span class="line-2">تۆڕ</span>
+                    <span class="line-1">گرامەری</span>
+                    <span class="line-2">ئینگلیزی</span>
                 </h1>
+                <p class="hero-subtitle">تاقیکردنەوەی زیرەکانە بۆ فێربوونی باشتر</p>
                 
                 <div class="btn-group mode-select">
-                    <button id="start-btn-mcq" class="magnetic-btn" onclick="startQuiz('mcq')">
-                        <span class="btn-text">هەڵبژاردن</span>
-                        <div class="btn-fill"></div>
-                    </button>
-                    <button id="start-btn-sa" class="magnetic-btn secondary" onclick="startQuiz('sa')">
-                        <span class="btn-text">وەڵامی کورت</span>
+                    <button id="start-btn-mcq" class="magnetic-btn primary-btn" onclick="startQuiz('mcq')">
+                        <span class="btn-text">دەستپێبکە</span>
                         <div class="btn-fill"></div>
                     </button>
                 </div>
@@ -66,46 +62,46 @@
                     <div class="progress-fill" id="progress-bar"></div>
                 </div>
                 <div class="quiz-meta">
-                    <span id="question-count">٠١ / ٥٥</span>
-                    <span id="score-display">نمرە: ٠</span>
+                    <span id="question-count">٠١ / ٥٠</span>
                     <div id="streak-counter" class="streak-counter hidden">
                         <span class="streak-icon">🔥</span>
                         <span id="streak-value">0</span>
                     </div>
+                    <span id="score-display">نمرە: ٠</span>
                 </div>
             </div>
 
             <div class="question-wrapper">
-                <div class="question-content" dir="ltr"> <!-- Keep questions LTR for English -->
-                    <h2 id="question-text">Question text loads here...</h2>
+                <div class="question-content" dir="ltr">
+                    <h2 id="question-text">پرسیار بارکردن...</h2>
                 </div>
                 
-                <div class="options-grid" id="options-container" dir="ltr"> <!-- Keep options LTR for English -->
+                <div class="options-grid" id="options-container" dir="ltr">
                     <!-- Options injected via JS -->
                 </div>
 
                 <!-- Short Answer Area -->
-                <div id="sa-container" class="sa-container hidden" dir="rtl">
+                <div id="sa-container" class="sa-container hidden">
                     <div class="sa-input-group">
-                        <textarea id="sa-input" placeholder="وەڵامەکەت لێرە بنووسە (بەدڵخواز)..."></textarea>
+                        <textarea id="sa-input" placeholder="وەڵامەکەت لێرە بنووسە..." dir="rtl"></textarea>
                         <button id="sa-reveal-btn" class="magnetic-btn small">
-                            <span class="btn-text">وەڵام نیشان بدە</span>
+                            <span class="btn-text">وەڵام پیشان بدە</span>
                             <div class="btn-fill"></div>
                         </button>
                     </div>
                     
                     <div id="sa-model-answer" class="sa-model-answer hidden">
                         <h3>وەڵامی نموونەیی:</h3>
-                        <p id="sa-answer-text" dir="ltr"></p> <!-- English Answer Text -->
+                        <p id="sa-answer-text" dir="ltr"></p>
                         
                         <div class="sa-grading">
-                            <p>ئاستت چۆن بوو؟</p>
+                            <p>چۆن بوو؟</p>
                             <div class="grade-btns">
                                 <button class="grade-btn correct" id="grade-correct">
-                                    <span>دەمزانى</span>
+                                    <span>دەمزانی ✓</span>
                                 </button>
                                 <button class="grade-btn wrong" id="grade-wrong">
-                                    <span>نەمدەزانى</span>
+                                    <span>نەمدەزانی ✗</span>
                                 </button>
                             </div>
                         </div>
@@ -115,7 +111,7 @@
             
             <div class="quiz-footer">
                 <button id="next-btn" class="magnetic-btn secondary hidden">
-                    <span class="btn-text">پرسیاری داهاتوو</span>
+                    <span class="btn-text">← پرسیاری داهاتوو</span>
                     <div class="btn-fill"></div>
                 </button>
             </div>
@@ -126,6 +122,13 @@
             <div class="result-content">
                 <div class="score-display-large">
                     <svg viewBox="0 0 200 200" class="score-ring">
+                        <defs>
+                            <linearGradient id="scoreGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#6366f1"/>
+                                <stop offset="50%" style="stop-color:#8b5cf6"/>
+                                <stop offset="100%" style="stop-color:#a855f7"/>
+                            </linearGradient>
+                        </defs>
                         <circle cx="100" cy="100" r="90" class="ring-bg"></circle>
                         <circle cx="100" cy="100" r="90" class="ring-fill" id="score-ring-circle"></circle>
                     </svg>
@@ -136,7 +139,7 @@
                 </div>
                 
                 <h2 class="result-title">ئەنجامەکان</h2>
-                <p id="result-message" class="result-msg">...شیکردنەوەی ئەنجام</p>
+                <p id="result-message" class="result-msg">شیکردنەوەی ئەنجام...</p>
                 
                 <!-- Review Section -->
                 <div id="review-container" class="review-container">
@@ -144,7 +147,7 @@
                 </div>
 
                 <button id="restart-btn" class="magnetic-btn">
-                    <span class="btn-text">دووبارەکردنەوە</span>
+                    <span class="btn-text">دووبارە هەوڵبدەوە</span>
                     <div class="btn-fill"></div>
                 </button>
             </div>
